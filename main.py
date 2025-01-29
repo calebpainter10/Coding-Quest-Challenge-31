@@ -24,7 +24,7 @@ def calculate_distance(One_Coordinates: tuple, Two_Coordinates: tuple):
     return round(distance, 3)
 
 # Brute force nested loop approach
-distance_dictionary = {}
+minimum_distance = []
 
 # Iterate through first reference system
 for i in range(len(systems)):
@@ -39,13 +39,13 @@ for i in range(len(systems)):
 
         # Add distance to dictionary and give live user feedback
         distance = calculate_distance(i_coords, j_coords)
-        distance_dictionary[f"{i_system_name} --> {j_system_name}"] = distance
         print(f"{i_system_name} --> {j_system_name}: {distance} lightyears")
 
+        if not minimum_distance or distance < minimum_distance[1]:
+            minimum_distance = [f"{i_system_name} --> {j_system_name}", distance]
 
-# Calculate minimum distance and print results
-minimum_distance = min(distance_dictionary.values())
 
+# Print results 
 print("\n---------- Results ----------\n")
-print(f"Minimum distance: {minimum_distance} lightyears")
+print(f"Minimum distance: {minimum_distance[0]} with a distance of {minimum_distance[1]} lightyears.")
 
